@@ -1,14 +1,17 @@
 import tkinter as tk
 from src.interface import JogoInterface
+from src.controller import JogoController
 
 def main():
-    # Inicializa o motor gráfico (Tkinter)
     root = tk.Tk()
     
-    # Cria a nossa interface
-    app = JogoInterface(root)
+    # Inicia a Visão (View)
+    # Passamos apenas o root; o Controller cuidará do resto
+    ui = JogoInterface(root)
     
-    # Mantém a janela aberta
+    # Inicia o Controlador (Controller) e entrega a UI para ele
+    app = JogoController(ui)
+    
     root.mainloop()
 
 if __name__ == "__main__":

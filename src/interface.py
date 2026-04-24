@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import scrolledtext
-from PIL import Image, ImageTk # Necessário para as imagens
+from PIL import Image, ImageTk, ImageSequence
 import os
 
 class JogoInterface:
     def __init__(self, root):
         self.root = root
-        self.root.title("A Cidadela do Caos")
-        
+        self.root.title("Fighting Fantasy - A Cidadela do Caos [Beta]")
+
         # --- CONFIGURAÇÃO DE TELA ---
         self.root.geometry("950x750")
         self.root.minsize(850, 650)
@@ -22,26 +22,23 @@ class JogoInterface:
 
         # --- CARREGAMENTO DE ASSETS ---
         self.icones = {}
-        self.carregar_icones()
+        self.carregar_icones() # Agora a função está logo ali embaixo!
 
-        # --- 1. CABEÇALHO (JUSTIFICADO COM O TEXTO) ---
-        # Usamos o mesmo padx=40 do frame de texto para alinhar
+        # --- 1. CABEÇALHO (JUSTIFICADO) ---
         self.header = tk.Frame(root, bg=self.cor_bege_escuro, pady=10)
         self.header.pack(side="top", fill="x")
 
-        # Este container interno garante o alinhamento "justificado"
         self.status_container = tk.Frame(self.header, bg=self.cor_bege_escuro)
-        self.status_container.pack(fill="x", padx=40) # Alinhado com a janela de texto
+        self.status_container.pack(fill="x", padx=40)
 
-        # Configura as 4 colunas para terem o mesmo peso (distribuição igual)
         for i in range(4):
             self.status_container.columnconfigure(i, weight=1)
 
-        self.stats = {}
-        self.criar_slot_status("Habilidade", "hab.png", 0)
-        self.criar_slot_status("Energia", "ene.png", 1)
-        self.criar_slot_status("Sorte", "sor.png", 2)
-        self.criar_slot_status("Magia", "mag.png", 3)
+        self.stats_vars = {}
+        self.criar_slot_status("Habilidade", 0)
+        self.criar_slot_status("Energia", 1)
+        self.criar_slot_status("Sorte", 2)
+        self.criar_slot_status("Magia", 3)
 
         # --- 2. RODAPÉ DE BOTÕES ---
         self.frame_botoes = tk.Frame(root, bg=self.cor_bege_claro, pady=15)
@@ -49,7 +46,6 @@ class JogoInterface:
 
         self.btn_iniciar = tk.Button(
             self.frame_botoes, text="[ INICIAR AVENTURA ]", 
-            command=self.exibir_introducao,
             font=("Courier New", 12, "bold"), 
             bg=self.cor_preto, fg=self.cor_branco,
             padx=25, pady=12, relief="flat", cursor="hand2"
@@ -57,21 +53,28 @@ class JogoInterface:
         self.btn_iniciar.pack()
 
         # --- 3. JANELA DE TEXTO ---
-        self.frame_texto = tk.Frame(root, bg=self.cor_bege_escuro, padx=40, pady=10)
-        self.frame_texto.pack(side="top", expand=True, fill="both")
+        self.frame_central = tk.Frame(root, bg=self.cor_bege_escuro, padx=40, pady=10)
+        self.frame_central.pack(side="top", expand=True, fill="both")
+
+        self.container_texto = tk.Frame(self.frame_central, bg=self.cor_branco, bd=2, relief="solid")
+        self.container_texto.pack(expand=True, fill="both")
 
         self.texto_principal = scrolledtext.ScrolledText(
-            self.frame_texto, wrap=tk.WORD, 
+            self.container_texto, wrap=tk.WORD, 
             font=("Courier New", 14, "bold"),
             bg=self.cor_branco, fg=self.cor_preto, 
-            padx=30, pady=30, 
-            borderwidth=2, relief="solid"
+            padx=30, pady=30, borderwidth=0
         )
         self.texto_principal.pack(expand=True, fill="both")
         self.texto_principal.configure(state="disabled")
 
+        # LABEL DO DADO (Invisível até ser animado)
+        self.lbl_dado = tk.Label(self.container_texto, bg=self.cor_branco)
+        self.lbl_dado.place(relx=1.0, rely=1.0, anchor="se", x=-30, y=-30)
+
+    # --- MÉTODOS DE SUPORTE ---
+
     def carregar_icones(self):
-        """Carrega e redimensiona as imagens da pasta assets"""
         caminho_assets = os.path.join(os.path.dirname(__file__), '..', 'assets')
         arquivos = {
             "Habilidade": "hab.png",
@@ -84,56 +87,73 @@ class JogoInterface:
             caminho = os.path.join(caminho_assets, arq)
             try:
                 img = Image.open(caminho).convert("RGBA")
-                # Redimensiona para um tamanho que caiba bem (ex: 70x70 pixels)
                 img = img.resize((75, 75), Image.Resampling.LANCZOS)
                 self.icones[nome] = ImageTk.PhotoImage(img)
-            except Exception as e:
-                print(f"Erro ao carregar {arq}: {e}")
-                # Cria um placeholder caso a imagem não exista
+            except:
                 self.icones[nome] = None
 
-    def criar_slot_status(self, nome, img_nome, coluna):
+    def criar_slot_status(self, nome, coluna):
         var = tk.StringVar(value="0")
-        self.stats[nome] = var
+        self.stats_vars[nome] = var
 
-        # Frame para cada slot (Habilidade, Energia, etc)
         slot = tk.Frame(self.status_container, bg=self.cor_bege_escuro)
         slot.grid(row=0, column=coluna, sticky="nsew")
 
-        # Label da Imagem com o texto em cima
-        # compound="center" coloca o texto no meio da imagem
         lbl_img = tk.Label(
-            slot, 
-            image=self.icones[nome], 
-            textvariable=var,
-            font=("Courier New", 22, "bold"),
-            fg=self.cor_preto, # Cor do número
-            bg=self.cor_bege_escuro,
-            compound="center"
+            slot, image=self.icones.get(nome), textvariable=var,
+            font=("Courier New", 22, "bold"), fg=self.cor_preto,
+            bg=self.cor_bege_escuro, compound="center"
         )
         lbl_img.pack()
 
-        # Texto pequeno embaixo para identificar o que é
-        tk.Label(
-            slot, text=nome.upper(), 
-            bg=self.cor_bege_escuro, 
-            fg=self.cor_preto, 
-            font=("Courier New", 8, "bold")
-        ).pack()
+        tk.Label(slot, text=nome.upper(), bg=self.cor_bege_escuro, 
+                 fg=self.cor_preto, font=("Courier New", 8, "bold")).pack()
+
+    def animar_dado(self, duracao_ms=1500):
+        caminho_gif = os.path.join(os.path.dirname(__file__), '..', 'assets', 'dados.gif')
+        if not os.path.exists(caminho_gif):
+            print("Aviso: assets/dados.gif não encontrado.")
+            return
+
+        try:
+            img_gif = Image.open(caminho_gif)
+            
+            # Redimensionando para 60x60 (um tamanho bom para o canto)
+            tamanho_pixel = (60, 60)
+            self.frames = []
+            
+            for frame in ImageSequence.Iterator(img_gif):
+                # Importante: converter para RGBA para manter transparência se houver
+                frame_redimensionado = frame.copy().convert("RGBA").resize(tamanho_pixel, Image.Resampling.LANCZOS)
+                self.frames.append(ImageTk.PhotoImage(frame_redimensionado))
+            
+            def atualizar(ind):
+                if hasattr(self, 'frames') and self.frames:
+                    frame = self.frames[ind]
+                    self.lbl_dado.configure(image=frame)
+                    # Velocidade da animação (80ms entre frames)
+                    self.proximo_frame = self.root.after(80, atualizar, (ind + 1) % len(self.frames))
+
+            atualizar(0)
+            # Agenda o sumiço do dado após a duração total
+            self.root.after(duracao_ms, self.parar_animacao_dado)
+            
+        except Exception as e:
+            print(f"Erro ao animar dado: {e}")
+
+    def parar_animacao_dado(self):
+        if hasattr(self, 'proximo_frame'):
+            self.root.after_cancel(self.proximo_frame)
+        self.lbl_dado.configure(image="")
+
+    def atualizar_stats(self, hab, ene, sor, mag):
+        self.stats_vars["Habilidade"].set(str(hab))
+        self.stats_vars["Energia"].set(str(ene))
+        self.stats_vars["Sorte"].set(str(sor))
+        self.stats_vars["Magia"].set(str(mag))
 
     def exibir_texto(self, texto):
         self.texto_principal.configure(state="normal")
         self.texto_principal.delete(1.0, tk.END)
         self.texto_principal.insert(tk.END, texto)
         self.texto_principal.configure(state="disabled")
-
-    def atualizar_stats(self, hab, ene, sor, mag):
-        self.stats["Habilidade"].set(str(hab))
-        self.stats["Energia"].set(str(ene))
-        self.stats["Sorte"].set(str(sor))
-        self.stats["Magia"].set(str(mag))
-
-    def exibir_introducao(self):
-        self.atualizar_stats(10, 22, 11, 7)
-        msg = "A CIDADELA DO CAOS\n\nSua missão começa aqui..."
-        self.exibir_texto(msg)
