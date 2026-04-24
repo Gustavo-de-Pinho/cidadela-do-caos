@@ -1,5 +1,7 @@
 import random
 
+#personagem e dado são definidos aqui, porque meio que rolar dados é uma caracteristica do protagonista
+
 class Personagem:
     def __init__(self):
         # Atributos principais

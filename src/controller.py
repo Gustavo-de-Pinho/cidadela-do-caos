@@ -1,6 +1,8 @@
 from src.personagem import Personagem
 from src.engine import Engine
 
+#como as coisas são ligas, é aqui
+
 class JogoController:
     def __init__(self, interface):
         self.ui = interface
@@ -37,4 +39,4 @@ class JogoController:
             f"{mag} pontos de Magia.\n"
             "Prepare-se, pois os perigos da Cidadela não perdoam erros."
         )
-        self.ui.exibir_texto(msg)
+        self.ui.exibir_texto_maquina(msg)

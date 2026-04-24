@@ -3,6 +3,8 @@ from tkinter import scrolledtext
 from PIL import Image, ImageTk, ImageSequence
 import os
 
+#Tudo que tem haver com a janela do jogos, é aqui
+
 class JogoInterface:
     def __init__(self, root):
         self.root = root
@@ -152,8 +154,25 @@ class JogoInterface:
         self.stats_vars["Sorte"].set(str(sor))
         self.stats_vars["Magia"].set(str(mag))
 
-    def exibir_texto(self, texto):
+    def exibir_texto_maquina(self, texto, index=0):
+        """Exibe o texto caractere por caractere."""
+        if index == 0:
+            # No início, habilita o campo e limpa o texto anterior
+            self.texto_principal.configure(state="normal")
+            self.texto_principal.delete(1.0, tk.END)
+        
+        if index < len(texto):
+            # Insere um caractere
+            self.texto_principal.insert(tk.END, texto[index])
+            self.texto_principal.see(tk.END) # Scroll automático
+            # Agenda o próximo caractere (30ms é uma boa velocidade)
+            self.root.after(30, self.exibir_texto_maquina, texto, index + 1)
+        else:
+            # Ao terminar, desabilita para o usuário não digitar
+            self.texto_principal.configure(state="disabled")
+
+    """def exibir_texto(self, texto):
         self.texto_principal.configure(state="normal")
         self.texto_principal.delete(1.0, tk.END)
         self.texto_principal.insert(tk.END, texto)
-        self.texto_principal.configure(state="disabled")
+        self.texto_principal.configure(state="disabled")"""

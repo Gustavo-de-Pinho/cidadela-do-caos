@@ -1,6 +1,8 @@
 import random
 import time
 
+#como as coisas acontecem, é aqui
+
 class Engine:
     @staticmethod
     def rolar_dados(quantidade=1):
