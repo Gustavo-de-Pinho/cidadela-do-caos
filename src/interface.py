@@ -75,9 +75,10 @@ class JogoInterface:
         self.lbl_dado.place(relx=1.0, rely=1.0, anchor="se", x=-30, y=-30)
 
     # --- MÉTODOS DE SUPORTE ---
-
+    
+    #BARRA DE STATUS
     def carregar_icones(self):
-        caminho_assets = os.path.join(os.path.dirname(__file__), '..', 'assets')
+        caminho_assets = os.path.join(os.path.dirname(__file__), '..', 'assets', 'ui')
         arquivos = {
             "Habilidade": "hab.png",
             "Energia": "ene.png",
@@ -111,8 +112,9 @@ class JogoInterface:
         tk.Label(slot, text=nome.upper(), bg=self.cor_bege_escuro, 
                  fg=self.cor_preto, font=("Courier New", 8, "bold")).pack()
 
+    #EM RELAÇÃO AOS DADOS (O gif não a logica)
     def animar_dado(self, duracao_ms=1500):
-        caminho_gif = os.path.join(os.path.dirname(__file__), '..', 'assets', 'dados.gif')
+        caminho_gif = os.path.join(os.path.dirname(__file__), '..', 'assets', 'ui', 'dados.gif')
         if not os.path.exists(caminho_gif):
             print("Aviso: assets/dados.gif não encontrado.")
             return
@@ -148,12 +150,14 @@ class JogoInterface:
             self.root.after_cancel(self.proximo_frame)
         self.lbl_dado.configure(image="")
 
+    #ATUALIZA OS STATUS DO PERSONAGEM
     def atualizar_stats(self, hab, ene, sor, mag):
         self.stats_vars["Habilidade"].set(str(hab))
         self.stats_vars["Energia"].set(str(ene))
         self.stats_vars["Sorte"].set(str(sor))
         self.stats_vars["Magia"].set(str(mag))
 
+    #METODOS PARA EXIBIR O TEXTO
     def exibir_texto_maquina(self, texto, index=0):
         """Exibe o texto caractere por caractere."""
         if index == 0:
@@ -176,3 +180,26 @@ class JogoInterface:
         self.texto_principal.delete(1.0, tk.END)
         self.texto_principal.insert(tk.END, texto)
         self.texto_principal.configure(state="disabled")"""
+    
+    # PARA SELECIONAR ITENS E MAGIAS, DIFERENTE DO TEXTO CoNVENCIONAL
+    def preparar_palco_para_cards(self):
+        """Esconde a janela de texto e limpa o frame central para os cards"""
+        # pack_forget() apenas esconde o widget, não o deleta da memória.
+        self.container_texto.pack_forget()
+        
+        # Limpa qualquer resquício de cards anteriores que possam estar lá
+        for widget in self.frame_central.winfo_children():
+            if widget != self.container_texto: # Não deleta a janela de texto escondida
+                widget.destroy()
+        
+        return self.frame_central
+
+    def restaurar_palco_para_texto(self):
+        """Remove os cards e volta a exibir a janela de texto da história"""
+        # Limpa os cards
+        for widget in self.frame_central.winfo_children():
+            if widget != self.container_texto:
+                widget.destroy()
+        
+        # Volta a mostrar a caixa de texto branca
+        self.container_texto.pack(expand=True, fill="both")

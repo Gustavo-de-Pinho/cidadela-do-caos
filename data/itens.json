@@ -1,0 +1,20 @@
+[
+  {
+    "id": "espada_curta_gasta",
+    "nome": "Espada Curta",
+    "descricao": "Sua fiel arma de combate.",
+    "imagem": "espada.png"
+  },
+  {
+    "id": "armadura_couro_gasta",
+    "nome": "Couraça de Couro",
+    "descricao": "Proteção básica contra cortes.",
+    "imagem": "armadura.png"
+  },
+  {
+    "id": "lanterna",
+    "nome": "Lanterna",
+    "descricao": "Essencial para iluminar a Cidadela.",
+    "imagem": "lanterna.png"
+  }
+]

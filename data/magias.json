@@ -1,0 +1,50 @@
+[
+  {
+    "id": "copia_criatura",
+    "nome": "Cópia de Criatura",
+    "descricao": "Cria um clone do seu oponente para lutar por você.",
+    "imagem": "copia.png"
+  },
+  {
+    "id": "eletricidade",
+    "nome": "Eletricidade",
+    "descricao": "Dispare raios pelas pontas dos dedos.",
+    "imagem": "raio.png"
+  },
+  {
+    "id": "fogo",
+    "nome": "Fogo",
+    "descricao": "Poderosas bolas de fogo contra inimigos.",
+    "imagem": "fogo.png"
+  },
+  {
+    "id": "ilusao",
+    "nome": "Ilusão",
+    "descricao": "Crie imagens falsas para enganar oponentes.",
+    "imagem": "ilusao.png"
+  },
+  {
+    "id": "levitacao",
+    "nome": "Levitação",
+    "descricao": "Flutue no ar para evitar abismos ou armadilhas.",
+    "imagem": "levitacao.png"
+  },
+  {
+    "id": "escudo",
+    "nome": "Escudo",
+    "descricao": "Proteção mágica contra ataques físicos.",
+    "imagem": "escudo.png"
+  },
+  {
+    "id": "energia",
+    "nome": "Energia",
+    "descricao": "Recupera pontos de ENERGIA perdidos.",
+    "imagem": "energia_mag.png"
+  },
+  {
+    "id": "fraqueza",
+    "nome": "Fraqueza",
+    "descricao": "Reduz a HABILIDADE do inimigo.",
+    "imagem": "fraqueza.png"
+  }
+]
