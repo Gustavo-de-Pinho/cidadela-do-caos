@@ -1,0 +1,44 @@
+{
+    "introducao_1": {
+        "texto": "O ordeiro e generoso povo do Vale dos Salgueiros vive há oito anos sob o terror e medo do feiticeiro Balthus Dire. Terror – porque o poder dele é realmente aterrorizante - e medo causados pela notícia que acabou chegando aos ouvidos desse povo, vinda dos domínios do feiticeiro, de que seus ambiciosos planos de conquista começariam pelo próprio Vale.",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_2"}
+        ]
+    },
+    "introducao_2": {
+        "texto": "Um fiel Semi-Elfo enviado em uma missão de espionagem à Torre Negra voltou galopando para o Vale há três dias com uma mensagem desesperada. Do interior das cavernas de Rocha Escarpada, Balthus Dire tinha recrutado um exército de Caóticos e se preparava para atacar com eles o Vale dentro de uma semana.",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_3"}
+        ]
+    },
+    "introducao_3": {
+        "texto": "O bom Rei Salamon era um homem de ação. Foram enviados mensageiros por todo o Vale no mesmo dia para preparar as defesas e convocar os homens para a guerra. Foram enviados também cavaleiros à Grande Floresta de Yore para avisar aos Semi-Elfos que moravam lá e fazer um apelo para que se aliassem às forças. O Rei Salamon era também um homem sábio. Ele sabia muito bem que as notícias inevitavelmente chegariam aos ouvidos do Grande Mago de Yore, um mestre da magia branca de grandes poderes, que vivia nas profundezas da floresta. O mago era velho e não resistiria a uma batalha destas proporções. Mas ele havia ensinado suas artes a vários jovens magos, e talvez um de seus discípulos de magia ajudasse o rei e seus súditos com coragem e ambição.",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_4"}
+        ]
+    },
+    "introducao_4": {
+        "texto": "Você é o aluno brilhante do Grande Mago de Yore. Ele tem sido um Mestre duro, e sua própria impaciência muitas vezes foi mais forte do que você. Talvez um pouco precipitadamente, você partiu de imediato para a corte de Salamon. O rei recebeu-o entusiasticamente e explicou seu plano. A batalha poderia ser evitada sem derramamento de sangue se Balthus fosse assassinado antes que seu exército pudesse ser reunido.",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_5"}
+        ]
+    },
+    "introducao_5": {
+        "texto": "A missão que você tem pela frente é extremamente perigosa. Balthus Dire está cercado, em sua Cidadela, por uma multidão de criaturas assombrosas. Embora a Magia seja a sua arma mais forte, haverá momentos em que você terá que confiar em sua espada para sobreviver.",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_6"}
+        ]
+    },
+    "introducao_6": {
+        "texto": "O Rei Salamon expôs a você como seria a sua missão e o advertiu dos perigos que estavam à sua frente. Há um caminho melhor para atravessar a Cidadela. Se você o descobrir, terá êxito com um mínimo de risco para a sua pessoa. Talvez você precise de várias viagens para descobrir o caminho mais fácil para atravessar a Cidadela",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_7"}
+        ]
+    },
+    "introducao_7": {
+        "texto": "Você deixa o Vale dos Salgueiros na longa caminhada para a Torre Negra. No sopé da colina de Rocha Escarpada, você pode ver sua silhueta contra o céu escuro...",
+        "opcoes": [
+            { "texto": "continuar lendo...", "ir_para": "introducao_1"}
+        ]
+    }
+}

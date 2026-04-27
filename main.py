@@ -1,16 +1,15 @@
 import tkinter as tk
 from src.interface import JogoInterface
 from src.controller import JogoController
+from src.controller import JogoController
 
 def main():
     root = tk.Tk()
+    root.title("Fighting Fantasy")
+    root.geometry("950x750")
     
-    # Inicia a Visão (View)
-    # Passamos apenas o root; o Controller cuidará do resto
-    ui = JogoInterface(root)
-    
-    # Inicia o Controlador (Controller) e entrega a UI para ele
-    app = JogoController(ui)
+    # O controlador assume o comando a partir daqui
+    app = JogoController(root)
     
     root.mainloop()
 
