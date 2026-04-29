@@ -1,7 +1,6 @@
 import tkinter as tk
 from src.interface import JogoInterface
 from src.controller import JogoController
-from src.controller import JogoController
 
 def main():
     root = tk.Tk()
