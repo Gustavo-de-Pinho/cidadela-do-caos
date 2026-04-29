@@ -3,25 +3,37 @@
     "id": "copia_criatura",
     "nome": "Cópia de Criatura",
     "descricao": "Cria um clone do seu oponente para lutar por você.",
-    "imagem": "copia.png"
+    "imagem": "copiaDeCriatura.png"
   },
   {
-    "id": "eletricidade",
-    "nome": "Eletricidade",
-    "descricao": "Dispare raios pelas pontas dos dedos.",
-    "imagem": "raio.png"
+    "id": "percepcao_extra_sensorial",
+    "nome": "Percepção Extra Sensorial",
+    "descricao": "Por ondas psiquícas leia a mente de outras criaturas - pode falhar.",
+    "imagem": "percepcaoExtraSensorial.png"
   },
   {
     "id": "fogo",
     "nome": "Fogo",
-    "descricao": "Poderosas bolas de fogo contra inimigos.",
+    "descricao": "Manipule chamas da maneira que preferir.",
     "imagem": "fogo.png"
+  },
+  {
+    "id": "ouro_dos_tolos",
+    "nome": "Ouro dos Tolos",
+    "descricao": "Transforme uma pilha de pedras em ouro, mas logo acaba.",
+    "imagem": "ouroDosTolos.png"
   },
   {
     "id": "ilusao",
     "nome": "Ilusão",
     "descricao": "Crie imagens falsas para enganar oponentes.",
     "imagem": "ilusao.png"
+  },
+  {
+    "id": "sorte",
+    "nome": "Sorte",
+    "descricao": "Recupere metde da sua sorte a qualquer momento.",
+    "imagem": "sorte.png"
   },
   {
     "id": "levitacao",
@@ -36,10 +48,22 @@
     "imagem": "escudo.png"
   },
   {
+    "id": "habilidade",
+    "nome": "Habilidade",
+    "descricao": "Recupera metade dos pontos de HABILIDADE perdidos a qualquer momento.",
+    "imagem": "habilidade.png"
+  },
+  {
     "id": "energia",
     "nome": "Energia",
-    "descricao": "Recupera pontos de ENERGIA perdidos.",
-    "imagem": "energia_mag.png"
+    "descricao": "Recupera metade dos pontos de ENERGIA perdidos a qualquer momento.",
+    "imagem": "energia.png"
+  },
+  {
+    "id": "forca",
+    "nome": "Força",
+    "descricao": "Ganhe super força temporariamente.",
+    "imagem": "forca.png"
   },
   {
     "id": "fraqueza",

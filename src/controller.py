@@ -102,7 +102,7 @@ class JogoController:
 
         msg = (
             "DESTINO TRAÇADO!\n\n"
-            f"Seus atributos iniciais: \nHabilidade {hab}\n, Energia {ene}\n, Sorte {sor}.\n"
+            f"Seus atributos iniciais: \nHabilidade {hab},\n Energia {ene},\n Sorte {sor}.\n"
             f"Você tem direito a {mag} pontos de Magia.\n\n"
             "Abra seu grimório agora para escolher seus feitiços."
         )
