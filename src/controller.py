@@ -109,29 +109,19 @@ class JogoController:
         self.ui.exibir_texto_maquina(msg)
 
     def abrir_selecao_magias(self):
-        """Transição para a tela de cards de magia"""
-        print("Debug: Abrindo tela de seleção de magias...")
-        
-        # 1. Troca o "palco" de texto por cards
         palco = self.ui.preparar_palco_para_cards()
+        rodape = self.ui.frame_botoes # Passamos o frame do rodapé
         
-        # 2. Carrega as magias do JSON
         dados_magias = self.carregar_json_generico('magias.json')
         
-        if not dados_magias:
-            print("Erro: Não foi possível carregar as magias para exibição.")
-            return
-
-        # 3. Inicia o gerenciador de cards no palco central
+        # Agora passamos 4 argumentos: palco, rodape, limite e callback
         self.tela_cards = GerenciadorCards(
             palco, 
+            rodape, 
             self.personagem.pontos_magia, 
             self.finalizar_escolha_magias
         )
         self.tela_cards.exibir("GRIMÓRIO DE ENCANTOS", dados_magias, "magias")
-        
-        # 4. Esconde o botão inferior da UI (o GerenciadorCards terá seu próprio botão)
-        self.ui.btn_iniciar.pack_forget()
 
     def finalizar_escolha_magias(self, escolhidas):
         """Salva as magias e inicia a história real"""
